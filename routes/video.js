@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('video', { title: 'MYMusic' });
+  res.render('video', { title: 'MYMusic',
+    className: 'video'
+  });
 });
 
 module.exports = router;
