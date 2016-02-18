@@ -1,5 +1,32 @@
-<script src="/javascript/script.js"></script>
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+<!-- this is side nabvar toggle functionality-->
+<script>
+// $(document).ready(function () {
+//   $('#menu-toggle').click(function(e){
+//     e.preventDefault();
+//     $('#wrapper').toggleClass('menuDisplayed');
+//   });
+// });
+
+
+
+$(function(){
+    $('#menu-toggle').on('click', function(e){
+        e.preventDefault();
+        if( $('#sidebar-wrapper').is(':visible') ) {
+            $('#sidebar-wrapper').animate({ 'width': '0px' }, 'slow', function(){
+                $('#sidebar-wrapper').hide();
+            });
+            $('#page-content-wrapper').animate({ 'padding-left': '0px' }, 'slow');
+        }
+        else {
+            $('#sidebar-wrapper').show();
+            $('#sidebar-wrapper').animate({ 'width': '250px' }, 'slow');
+            $('#page-content-wrapper').animate({ 'padding-left': '250px' }, 'slow');
+        }
+    });
+});
+</script>
