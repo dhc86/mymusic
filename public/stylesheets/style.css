@@ -83,14 +83,19 @@
 }
 
 /*music page*/
-.right-side-page-content {
+.block-column {
+  background: #004044;
+  border: 7px solid black;
+}
+
+.button-navbar{
+  /*border: 3px solid white;*/
+  he: 40px;
   
 
 }
 
-
-
-
-
-
-
+.button-navbar button{
+  margin-left: 0px;
+  position: relative;
+}
