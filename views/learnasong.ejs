@@ -2,62 +2,127 @@
 <html>
   <head><% include partials/template/head.ejs  %></head>
   <body>
-
-    <div id="wrapper">
+  
+   <div id="wrapper">
 
     <!-- sidebar -->
     <% include partials/template/header.ejs %>
 
     <!-- pagecontent -->
+
     <div class="className" id="page-content-wrapper">
       <!-- button for navbar -->
-      <button type="button" id="menu-toggle" class="btn btn-default" aria-label="Left Align">
-      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-      </button>
-      
-      <div class="col-lg-12 text-center ">
-        <div class="col-lg-6">
-          <img class="page-header"  src="/images/logonavbar.png" alt="">
-          <h1>Search a Lesson</h1>
+      <div class="button-navbar">
 
-          <!-- <input type=search name=s>   -->
-          <form class="navbar-form" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Instrument and song">
-            </div>
-            <button type="submit" class="btn btn-default">Find Song Lesson</button>
-          </form>
-          
+        <button type="button" id="menu-toggle" class="btn btn-warning" aria-label="Left Align">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        </button>
+          <img class="center-block"  src="/images/logonavbar.png" alt="">
+      </div>       
 
-          <video loop="loop" width="470" height="290" autoplay>
+
+      <div class="col-lg-12">
+        <div class="col-lg-6 block-column">
+
+          <video loop="loop" width="445" height="290" autoplay>
             <source src="/images/learnasong.webm" type="video/webm">
             <source src="/images/learnasong.mp4" type="video/mp4">
             <source src="/images/learnasong.ogg" type="video/ogg">
             Your browser does not support the video tag.
           </video>  
+        <h3 class="text-center">Song lessons:</h3>
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Play</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Metallica</td>
+                <td>One</td>
+                <th><span class="glyphicon glyphicon-headphones" aria-hidden="true"></span></th>
+                <th><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></th>
+              </tr>
+              <tr>
+                <td>Bon Jovi</td>
+                <td>It's my life</td>
+                <th><span class="glyphicon glyphicon-headphones" aria-hidden="true"></span></th>
+                <th><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></th>
+              </tr>
+              <tr>
+                <td>Michel Jackson</td>
+                <td>You are not Alone</td>
+                <th><span class="glyphicon glyphicon-headphones" aria-hidden="true"></span></th>
+                <th><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></th>
+              </tr>
+            </tbody>
+          </table>
+
         </div>
-        <div class="col-lg-6">
-          <h2>Results Search results</h2>
-          <div class="col-lg-6">
+        <div class="col-lg-6 block-column">
+          <h3 class="text-center">Find your songs lessons</h3>
+          <form class="navbar-form" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Instrument & Song">
+            </div>
+            <button type="submit" class="btn btn-warning">Find My Song Lessons</button>
+          </form>
+          <div class="col-lg-12">
+
+          <h2>Results</h2>    
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Play</th>
+                <th>Save</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Metallica</td>
+                <td>One</td>
+                <th><span class="glyphicon glyphicon-headphones" aria-hidden="true"></span></th>
+                <th><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></th>
+              </tr>
+              <tr>
+                <td>Bon Jovi</td>
+                <td>It's my life</td>
+                <th><span class="glyphicon glyphicon-headphones" aria-hidden="true"></span></th>
+                <th><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></th>
+              </tr>
+              <tr>
+                <td>Michel Jackson</td>
+                <td>You are not Alone</td>
+                <th><span class="glyphicon glyphicon-headphones" aria-hidden="true"></span></th>
+                <th><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></th>
+              </tr>
+            </tbody>
+          </table>
             
-            <p>one image here</p>
+            
 
           </div>
-          <div class="col-lg-6">
-            
-            <p>one image here</p>            
 
-          </div>
           <!-- <input type=search name=s>   -->
           
           
         </div>
       </div> 
-    </div>   
+    </div>  
   </div>
+
+
 
     <!-- <% include partials/template/footer.ejs %> -->
     <% include partials/template/jsdefaults.ejs %>
 
   </body>
 </html>
+
+
