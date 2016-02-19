@@ -9,24 +9,51 @@
     <% include partials/template/header.ejs %>
 
     <!-- pagecontent -->
-    <div id="page-content-wrapper">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12"> 
-            
-            <button type="button" id="menu-toggle" class="btn btn-success" aria-label="Left Align">MENU
-            <span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span>
-            </button>
 
-            <h1><%= title %></h1>
-            <p>Welcome to <%= title %></p>
-            <p>this should shoe in web site!</p>
+    <div class="className" id="page-content-wrapper">
+      <!-- button for navbar -->
+      <button type="button" id="menu-toggle" class="btn btn-default" aria-label="Left Align">
+      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+      </button>
+  
+      <div class="col-lg-12 text-center ">
+        <div class="col-lg-6">
+          <img class="page-header"  src="/images/logonavbar.png" alt="">
+          <h1>Search a Song</h1>
 
-            <h1>Serach the songs</h1>
-            <p>In this section you will search your songs</p>
-          </div>
+          <!-- <input type=search name=s>   -->
+          <form class="navbar-form" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Find My Song</button>
+          </form>
+          
+
+          <video loop="loop" width="470" height="290" autoplay>
+            <source src="/images/music.webm" type="video/webm">
+            <source src="/images/music.mp4" type="video/mp4">
+            <source src="/images/music.ogg" type="video/ogg">
+            Your browser does not support the video tag.
+          </video>  
         </div>
-      </div>
+        <div class="col-lg-6">
+          <h2>Results Search results</h2>
+          <div class="col-lg-6">
+            
+            <p>one image here</p>
+
+          </div>
+          <div class="col-lg-6">
+            
+            <p>one image here</p>            
+
+          </div>
+          <!-- <input type=search name=s>   -->
+          
+          
+        </div>
+      </div> 
     </div>  
   </div>
 
