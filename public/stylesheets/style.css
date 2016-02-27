@@ -106,6 +106,7 @@ body {
 .button-navbar button{
   margin-left: 0px;
   position: relative;
+  /*position: fixed;*/
 }
 
 /*some space to show videos*/

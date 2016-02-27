@@ -40,11 +40,11 @@ $(function(){
 
   });
 
-// youtube 
+// youtube API
   $('.find-video-button').on('click', function(e) {
     console.log("here we are !")
-     e.preventDefault();
-     var search_topic = $('input').val()
+    e.preventDefault();
+    var search_topic = $('input').val()
     $.ajax({
       url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&q='+search_topic+'&type=video&videoCaption=closedCaption&key=AIzaSyDcADPFKszTytXes32wpf2iotWdTdsMlEU',
       method: 'GET',
@@ -60,34 +60,30 @@ $(function(){
           var videoid= item.id.videoId;
 
 
-        var show_video = $("<iframe class='embed-responsive-item' width='400' height='215' src="+video+videoid+">");
+          var show_video = $("<iframe class='embed-responsive-item' width='400' height='215' src="+video+videoid+">");
 
-        var title = "Constructing HTML Elements";
+          var title = "Constructing HTML Elements";
 
-        var html = [
-        '<div class="embed-responsive embed-responsive-16by9 videos-display">',
-          '<iframe class="embed-responsive-item" width="400" height="215" src="'+video+videoid+'">',
-        '</div>'
-        ].join("\n");
+          // constructing the html to add in DOM
+          var html = [
+          '<div class="embed-responsive embed-responsive-16by9 videos-display">',
+            '<iframe class="embed-responsive-item" width="400" height="215" src="'+video+videoid+'">',
+          '</div>'
+          ].join("\n");
 
-        $(html).appendTo('.show-videos');
+          $(html).appendTo('.show-videos');
 
-        $('.show-videos').append("<button type='submit' class='btn btn-inverted btn-block btn-xs save-video-button'><span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'></span> Save it!</button>");
-
+          $('.show-videos').append("<button type='submit' info="+video+videoid+"  class='btn btn-inverted btn-block btn-xs save-video-button'><span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'></span> Save it!</button>");
         });
-        
-      
-$('.save-video-button').on('click', function(e) {
-  alert("cbhcbdjcd");
-
-});
-
-      
-        
+        //getting the url of embeded video to be saved
+        $('.save-video-button').on('click', function(event) {
+          var info = $( this ).closest( "button" ).attr('info');
+          console.log(info);
+          debugger
+        });      
       }    
     });
-
- });
+  });
 
 
 
