@@ -58,28 +58,13 @@ $(function(){
           console.log('each look response', item);
           var video = "https://www.youtube.com/embed/";
           var videoid= item.id.videoId;
-          
-          // "<div class='embed-responsive embed-responsive-16by9 show-videos'>
-            
-          // </div>"
-
 
 
         var show_video = $("<iframe class='embed-responsive-item' width='400' height='215' src="+video+videoid+">");
 
-        // show_video.text(video).appendTo('.show-videos');
-
-        // var render_html = "<button type='submit' class='btn btn-warning'><span class='glyphicon glyphicon-th-list' aria-hidden='true'></span></button>";
-
-        // $('.show-videos').append("<button type='submit' class='btn btn-warning save-video-button'>Save</button>");
-        // debugger
-
-        // ---------------
-
         var title = "Constructing HTML Elements";
 
         var html = [
-
         '<div class="embed-responsive embed-responsive-16by9 videos-display">',
           '<iframe class="embed-responsive-item" width="400" height="215" src="'+video+videoid+'">',
         '</div>'
@@ -87,9 +72,8 @@ $(function(){
 
         $(html).appendTo('.show-videos');
 
-        $('.show-videos').append("<button type='submit' class='btn btn-warning btn-block btn-xs save-video-button'><span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'></span> Save it!</button>");
+        $('.show-videos').append("<button type='submit' class='btn btn-inverted btn-block btn-xs save-video-button'><span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'></span> Save it!</button>");
 
-        // ---------------
         });
         
       
