@@ -1,4 +1,7 @@
 /*sidebar*/
+html {
+  background: black;
+}
 body {
   background: black;
 }
@@ -103,4 +106,9 @@ body {
 .button-navbar button{
   margin-left: 0px;
   position: relative;
+}
+
+.videos-display {
+  margin-top: 15px;
+  
 }
