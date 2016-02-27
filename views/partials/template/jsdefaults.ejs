@@ -1,3 +1,4 @@
+<script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
@@ -6,14 +7,96 @@
 <script>
 $(function(){
 
+// Soundcloud API
+  SC.initialize({
+    client_id: '90cf30ff04eaf9e6a8212991b27f9a3b'
+  });
+
+  $('.find-song-button').on('click', function(e){
+    e.preventDefault();
+
+
+    var title = $('input').val();
+
+      SC.oEmbed('https://soundcloud.com/friendlistworld/metallica-master-of-puppets', {
+    
+      // element: document.getElementById('putTheWidgetHere')
+      // auto_play: true
+    }).then(function(embed){
+      console.log(embed);
+      console.log(embed.html);
+      console.log(embed.title);
+    });
+
   
+
+ 
+
+    // var track_url = 'http://soundcloud.com/forss/flickermood';
+    // SC.oEmbed(track_url, { auto_play: true }).then(function(oEmbed) {
+    //   console.log('oEmbed response: ', oEmbed);
+    // });   
+
+
+  });
+
+// youtube 
+  $('.find-video-button').on('click', function(e) {
+    console.log("here we are !")
+     e.preventDefault();
+     var search_topic = $('input').val()
+    $.ajax({
+      url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&q='+search_topic+'&type=video&videoCaption=closedCaption&key=AIzaSyDcADPFKszTytXes32wpf2iotWdTdsMlEU',
+      method: 'GET',
+      dataType: 'jsonp',
+      success: function(data){ 
+
+        var result = data.items;
+        // console.log('complete response', result);
+
+        $.each(result, function(index, item){
+          console.log('each look response', item);
+          var video = "https://www.youtube.com/embed/";
+          var videoid= item.id.videoId;
+          
+          // "<div class='embed-responsive embed-responsive-16by9 show-videos'>
+            
+          // </div>"
+
+
+
+          
+        var show_video = $("<iframe class='embed-responsive-item' width='210' height='115' src="+video+videoid+">");
+
+        show_video.text(video).appendTo('.show-videos');
+
+        var render_html = "<button type='submit' class='btn btn-warning'><span class='glyphicon glyphicon-th-list' aria-hidden='true'></span></button>";
+
+        // $('.show-videos').append("<button type='submit' class='btn btn-warning save-video-button'>Save Video</button>");
+        // debugger
+        });
+        
+      
+$('.save-video-button').on('click', function(e) {
+  alert("cbhcbdjcd");
+
+});
+
+      
+        
+      }    
+    });
+
+ });
+
+
 
   // $('.active-menu').on('click', function(){
   //   $('.active-menu').removeClass('selected');
   //   $(this).addClass('selected');
   // });
 
-
+// navbar menu slide functionality
   $('#menu-toggle').on('click', function(e){
     e.preventDefault();
     if( $('#sidebar-wrapper').is(':visible') ) {

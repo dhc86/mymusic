@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var db = require('./db');
 
 var routes = require('./routes/index');
 var music = require('./routes/music');
@@ -12,6 +14,61 @@ var learninstrument = require('./routes/learninstrument');
 var learnasong = require('./routes/learnasong');
 
 var app = express();
+
+
+// --------------mongo db -----------------
+
+
+
+var MongoClient = require('mongodb').MongoClient;
+var URL = 'mongodb://localhost:27017/mydatabase';
+
+// MongoClient.connect( URL , function(err) {
+//   if (err) {
+//     console.log('Unable to connect to Mongo.');
+//     process.exit(1);
+//   } else {
+//     app.listen(3000, function() {
+//       console.log('Listening on port 3000...');
+//     });
+//   }
+// });
+
+
+
+
+MongoClient.connect(URL, function(err, db) {
+  if (err) {
+    console.log('there is an error with mongodb connection, please check!')
+    return}
+
+  else {
+    console.log('Connected and Running Mongo Db...');
+    var collection = db.collection('foods');
+
+    // collection.insert({name: 'taco', tasty: true}, function(err, result) {
+    //   collection.find({name: 'taco'}).toArray(function(err, docs) {
+    //     console.log(docs[0]);
+    //     db.close();
+    //   });
+    // });
+  }
+});
+
+// setting up connection information with mongodb- synchronous call 
+// var mongoclient = new MongoClient(new Server('localhost', 27017, {
+//   'native_parser': true }));
+
+// var db = mongoclient.db('course');
+// app.get('/', function(req, res){
+//   db.connection('Hello_mongo_express').findOne({}, function(err, doc){
+//     res.render('Hello, doc')
+//   })
+
+// });
+
+
+//-------------------------------------------------
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,6 +96,11 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+// mongoose.connect('mongodb://55.55.55.5/demo');
+
+
+
+
 // error handlers
 
 // development error handler
@@ -51,6 +113,7 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
+
 }
 
 // production error handler

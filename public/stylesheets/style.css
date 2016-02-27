@@ -1,4 +1,8 @@
 /*sidebar*/
+body {
+  background: black;
+}
+
 #sidebar-wrapper {
   z-index: 1;
   position: absolute;
@@ -8,10 +12,12 @@
   background: #2C3E50;
   border: 5px solid black;
   /*opacity: 0.9; */
+  position: fixed;
 }
 /*main content*/
 #page-content-wrapper{
   width: 100%;
+  height: auto;
   position: absolute;
   padding: 15px;
   /*border: 5px solid green;*/
@@ -22,7 +28,6 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 100%;
   color: white;
 }
 
