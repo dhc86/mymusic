@@ -59,11 +59,6 @@ $(function(){
           var video = "https://www.youtube.com/embed/";
           var videoid= item.id.videoId;
 
-
-          var show_video = $("<iframe class='embed-responsive-item' width='400' height='215' src="+video+videoid+">");
-
-          var title = "Constructing HTML Elements";
-
           // constructing the html to add in DOM
           var html = [
           '<div class="embed-responsive embed-responsive-16by9 videos-display">',
@@ -75,7 +70,7 @@ $(function(){
 
           $('.show-videos').append("<button type='submit' info="+video+videoid+"  class='btn btn-inverted btn-block btn-xs save-video-button'><span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'></span> Save it!</button>");
         });
-        //getting the url of embeded video to be saved
+        //getting the url of embeded video to be saved (named info)
         $('.save-video-button').on('click', function(event) {
           var info = $( this ).closest( "button" ).attr('info');
           console.log(info);

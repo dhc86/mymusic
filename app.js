@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var db = require('./db');
+// var db = require('./db');
 
 var routes = require('./routes/index');
 var music = require('./routes/music');
@@ -15,60 +15,18 @@ var learnasong = require('./routes/learnasong');
 
 var app = express();
 
+//--------- with mongoose -  mongodb connection
+// mongoose.connect('mongodb://localhost:27017/mydatabase');
+// var db = mongoose.connection;
+// var personSchema = {
+//   firstName:String 
+// }
 
-// --------------mongo db -----------------
+// var Person = mongoose.model('Person', personSchema, 'mydatabase');
+// var mongo = require('mongodb');
+// var monk = require('monk');
+// var db = monk('localhost:27017/mydatabase');
 
-
-
-var MongoClient = require('mongodb').MongoClient;
-var URL = 'mongodb://localhost:27017/mydatabase';
-
-// MongoClient.connect( URL , function(err) {
-//   if (err) {
-//     console.log('Unable to connect to Mongo.');
-//     process.exit(1);
-//   } else {
-//     app.listen(3000, function() {
-//       console.log('Listening on port 3000...');
-//     });
-//   }
-// });
-
-
-
-
-MongoClient.connect(URL, function(err, db) {
-  if (err) {
-    console.log('there is an error with mongodb connection, please check!')
-    return}
-
-  else {
-    console.log('Connected and Running Mongo Db...');
-    var collection = db.collection('foods');
-
-    // collection.insert({name: 'taco', tasty: true}, function(err, result) {
-    //   collection.find({name: 'taco'}).toArray(function(err, docs) {
-    //     console.log(docs[0]);
-    //     db.close();
-    //   });
-    // });
-  }
-});
-
-// setting up connection information with mongodb- synchronous call 
-// var mongoclient = new MongoClient(new Server('localhost', 27017, {
-//   'native_parser': true }));
-
-// var db = mongoclient.db('course');
-// app.get('/', function(req, res){
-//   db.connection('Hello_mongo_express').findOne({}, function(err, doc){
-//     res.render('Hello, doc')
-//   })
-
-// });
-
-
-//-------------------------------------------------
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -89,6 +47,58 @@ app.use('/learninstrument', learninstrument);
 app.use('/learnasong', learnasong);
 
 
+
+
+
+// db.connect('mongodb://localhost:27017/mydatabase', function(err) {
+//   if (err) {
+//     console.log('Unable to connect to Mongo.')
+//     process.exit(1)
+//   } else {
+//     app.listen(3000, function() {
+//       console.log('Listening on port 3000...')
+//     });
+//   }
+// });
+// --------------mongo db -----------------
+
+
+// working with out using db.js
+var MongoClient = require('mongodb').MongoClient;
+var URL = 'mongodb://localhost:27017/mydatabase';
+
+MongoClient.connect(URL, function(err, db) {
+  if (err) {
+    console.log('there is an error with app.js mongodb connection, please check!')
+    return}
+
+  else {
+    console.log('Connected and Running app.js Mongo Db...');
+    var collection = db.collection('videos');
+    // console.log(collection);
+
+    // get
+    // collection.find(function(err, result) {
+    //   collection.find().toArray(function(err, docs) {
+    //     console.log(docs);
+    //     db.close();
+    //   });
+    // });
+
+    // create
+    // collection.insert({name: 'taco', tasty: true}, function(err, result) {
+    //   collection.find({name: 'taco'}).toArray(function(err, docs) {
+    //     console.log(docs[0]);
+    //     db.close();
+    //   });
+    // });
+  }
+});
+
+
+
+//-------------------------------------------------
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -96,16 +106,14 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// mongoose.connect('mongodb://55.55.55.5/demo');
-
-
-
-
 // error handlers
 
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
+
+  // mongoose.connect('mongodb://localhost:27017/mydatabase');
+
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
@@ -115,6 +123,8 @@ if (app.get('env') === 'development') {
   });
 
 }
+
+
 
 // production error handler
 // no stacktraces leaked to user
