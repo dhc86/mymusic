@@ -70,6 +70,8 @@ $(function(){
 
           $('.show-videos').append("<button type='submit' info="+video+videoid+"  class='btn btn-inverted btn-block btn-xs save-video-button'><span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'></span> Save it!</button>");
         });
+
+
         //getting the url of embeded video to be saved (named info)
         $('.save-video-button').on('click', function(event) {
           //get video url
@@ -131,6 +133,7 @@ $(function(){
       // get the video url
       var info = $( this ).closest( "button" ).attr('info');
       $( this ).closest( ".video-container" ).hide('slow');
+      //find location of where to make the delete request
       var collection = window.location.pathname;
       var URL = 'http://localhost:3000'+collection;
       // debugger
