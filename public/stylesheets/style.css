@@ -99,8 +99,6 @@ body {
 .button-navbar{
   /*border: 3px solid white;*/
   he: 40px;
-  
-
 }
 
 .button-navbar button{
@@ -118,7 +116,6 @@ body {
 .save-video-button {
   letter-spacing: 1px;
   background: black;
-  border-radius:0;
 }
 
 .save-video-button:hover {
@@ -129,10 +126,13 @@ body {
 .delete-video-button {
   letter-spacing: 1px;
   background: black;
-  border-radius:0;
 }
 
 .delete-video-button:hover {
   background: #eea236;
 }
 
+/*display videos from mongo db*/
+.videos-list {
+  margin-top: 15px;  
+}

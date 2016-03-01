@@ -15,6 +15,10 @@ var learnasong = require('./routes/learnasong');
 
 var app = express();
 
+
+
+var testdb = require('./routes/testdb');
+
 //--------- with mongoose -  mongodb connection
 // mongoose.connect('mongodb://localhost:27017/mydatabase');
 // var db = mongoose.connection;
@@ -45,6 +49,7 @@ app.use('/video', video);
 app.use('/music', music);
 app.use('/learninstrument', learninstrument);
 app.use('/learnasong', learnasong);
+app.use('/testdb', testdb);
 
 
 
@@ -64,17 +69,18 @@ app.use('/learnasong', learnasong);
 
 
 // working with out using db.js
-var MongoClient = require('mongodb').MongoClient;
-var URL = 'mongodb://localhost:27017/mydatabase';
+// var parseSchema = require('mongodb-schema');
+// var MongoClient = require('mongodb').MongoClient;
+// var URL = 'mongodb://localhost:27017/mydatabase';
 
-MongoClient.connect(URL, function(err, db) {
-  if (err) {
-    console.log('there is an error with app.js mongodb connection, please check!')
-    return}
+// MongoClient.connect(URL, function(err, db) {
+//   if (err) {
+//     console.log('there is an error with app.js mongodb connection, please check!')
+//     return}
 
-  else {
-    console.log('Connected and Running app.js Mongo Db...');
-    var collection = db.collection('videos');
+//   else {
+//     console.log('Connected and Running app.js Mongo Db...');
+//     var collection = db.collection('videos');
     // console.log(collection);
 
     // get
@@ -92,8 +98,10 @@ MongoClient.connect(URL, function(err, db) {
     //     db.close();
     //   });
     // });
-  }
-});
+
+
+//   }
+// });
 
 
 
@@ -135,6 +143,19 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
+
+//trying mongoos 
+
+
+
+
+
+
+
+
+
 
 
 module.exports = app;

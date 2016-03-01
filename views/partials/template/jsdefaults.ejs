@@ -73,8 +73,40 @@ $(function(){
         //getting the url of embeded video to be saved (named info)
         $('.save-video-button').on('click', function(event) {
           var info = $( this ).closest( "button" ).attr('info');
+
+          var obj = {
+            title: info.toString()
+          }
+
           console.log(info);
+          // debugger
+
+
+        //----------------ajax request using mongo db ------------
+          var collection = window.location.pathname;
+
+          var URL = 'http://localhost:3000'+collection;
           debugger
+          // debugger
+          // add item
+          $.ajax({
+            url: URL,
+            type: "POST",
+            data: JSON.stringify(obj),
+            contentType: "application/json",
+            success: function(data) {
+              console.log(data);
+              console.log("now what is the data, object or string?")
+            },
+            error:   function(xhr, text, err) {
+              console.log('error: ',err);
+              console.log('text: ', text);
+              console.log('xhr: ',xhr);
+              console.log("there is a problem whit your request, please check ajax request");
+            }
+          });
+          //---------------- END  -- ajax request using mongo db --------
+
         });      
       }    
     });

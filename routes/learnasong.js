@@ -1,41 +1,43 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.render('learnasong', { title: 'MYMusic',
-//     className: 'learnasong'
-//   });
-// });
+mongoose.createConnection('mongodb://localhost/mydatabase/learnasongs');
 
-router.get('/', function(req, res, next) {
-  var MongoClient = require('mongodb').MongoClient;
-  var URL = 'mongodb://localhost:27017/mydatabase';
-  MongoClient.connect(URL, function(err, db) {
-    if (err) {
-      console.log('there is an error with videos mongodb connection, please check!')
-      return}
-    else {
-      console.log('Connected and Running learnasong  Mongo Db...');
-      var collection = db.collection('learnasong');
-      // get
-      collection.find(function(err, result) {
-        collection.find().toArray(function(err, learnasongvideos) {
-          console.log(learnasongvideos.length);
-
-          //pass video array of objects
-          res.render('learnasong', { title: 'MYMusic',
-            className: 'learnasong', 
-            videos: learnasongvideos
-          });
-
-          console.log(learnasongvideos);
-          // db.close();
-        });
-      });
-    }
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function() {
+  // Create your schemas and models here.
+  var learnasongSchema = new mongoose.Schema({
+    video: String
   });
-});
 
+  // Compile a 'Video' model using the videoSchema as the structure.
+  // Mongoose also creates a MongoDB collection called 'Videos' for these documents.
+  var Learnasong = mongoose.model('Learnasong', learnasongSchema);
+  router.get('/', function(req, res, next) {
+    mongoose.model('Learnasong').find(function(err, videos){
+      res.render('learnasong', { title: 'MYMusic',
+        className: 'video',
+        videos: videos
+      });
+      console.log('videos: ', videos);
+    });
+  });
+
+  router.post('/', function(req, res){
+    var newvideo = res.req.body.title;
+    console.log('response :', newvideo);
+    var thor = new Learnasong({
+      video: newvideo
+    });
+    thor.save(function(err, thor) {
+      if (err) return console.error(err);
+      console.dir(thor);
+    });
+  });
+
+});
 
 module.exports = router;

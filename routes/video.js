@@ -1,53 +1,43 @@
 var express = require('express');
 var router = express.Router();
-// var mongoose = require('mongoose');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-// mongoose.model('videos', {name: String});
+mongoose.createConnection('mongodb://localhost/mydatabase/videos');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  var MongoClient = require('mongodb').MongoClient;
-  var URL = 'mongodb://localhost:27017/mydatabase';
-  MongoClient.connect(URL, function(err, db) {
-    if (err) {
-      console.log('there is an error with videos mongodb connection, please check!')
-      return}
-    else {
-      console.log('Connected and Running videos  Mongo Db...');
-      var collection = db.collection('videos');
-      // get
-      collection.find(function(err, result) {
-        collection.find().toArray(function(err, videos) {
-          console.log(videos.length);
-
-          //pass video array of objects
-          res.render('video', { title: 'MYMusic',
-            className: 'video', 
-            videos: videos
-          });
-
-          console.log(videos);
-          // db.close();
-        });
-      });
-    }
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function() {
+  // Create your schemas and models here.
+  var videoSchema = new mongoose.Schema({
+    video: String
   });
+
+  // Compile a 'Video' model using the videoSchema as the structure.
+  // Mongoose also creates a MongoDB collection called 'Videos' for these documents.
+  var Video = mongoose.model('Video', videoSchema);
+  router.get('/', function(req, res, next) {
+    mongoose.model('Video').find(function(err, videos){
+      res.render('video', { title: 'MYMusic',
+        className: 'video',
+        videos: videos
+      });
+      console.log('videos: ', videos);
+    });
+  });
+
+  router.post('/', function(req, res){
+    var newvideo = res.req.body.title;
+    console.log('response from router.post-video :', newvideo);
+    var thor = new Video({
+      video: newvideo
+    });
+    thor.save(function(err, thor) {
+      if (err) return console.error(err);
+      // console.dir(thor);
+    });
+  });
+
 });
-
-
-
-
-    // create
-    // collection.insert({name: 'taco', tasty: true}, function(err, result) {
-    //   collection.find({name: 'taco'}).toArray(function(err, docs) {
-    //     console.log(docs[0]);
-    //     db.close();
-    //   });
-    // });
-
-
-
-
-
 
 module.exports = router;

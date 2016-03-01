@@ -1,42 +1,44 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.render('learninstrument', { title: 'MYMusic',
-//     className: 'learninstrument'
-//   });
-// });
+mongoose.createConnection('mongodb://localhost/mydatabase/learninstruments');
 
-router.get('/', function(req, res, next) {
-  var MongoClient = require('mongodb').MongoClient;
-  var URL = 'mongodb://localhost:27017/mydatabase';
-  MongoClient.connect(URL, function(err, db) {
-    if (err) {
-      console.log('there is an error with videos mongodb connection, please check!')
-      return}
-    else {
-      console.log('Connected and Running learninstrument  Mongo Db...');
-      var collection = db.collection('learinstrument');
-      // get
-      collection.find(function(err, result) {
-        collection.find().toArray(function(err, learninstrumentvideos) {
-          console.log(learninstrumentvideos.length);
-
-          //pass video array of objects
-          res.render('learninstrument', { title: 'MYMusic',
-            className: 'learninstrument', 
-            videos: learninstrumentvideos
-          });
-
-          console.log(learninstrumentvideos);
-          // db.close();
-        });
-      });
-    }
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function() {
+  // Create your schemas and models here.
+  var learninstrumentSchema = new mongoose.Schema({
+    video: String
   });
-});
 
+  // Compile a 'Video' model using the videoSchema as the structure.
+  // Mongoose also creates a MongoDB collection called 'Videos' for these documents.
+  var Learninstrument = mongoose.model('Learninstrument', learninstrumentSchema);
+  router.get('/', function(req, res, next) {
+    mongoose.model('Learninstrument').find(function(err, videos){
+      res.render('learninstrument', { title: 'MYMusic',
+        className: 'learninstrument',
+        videos: videos
+      });
+      console.log('show (get) videos: ', videos);
+    });
+  });
+
+  router.post('/', function(req, res){
+    var newvideo = res.req.body.title;
+    console.log('response in router.post - learninstrument:', newvideo);
+    var thor = new Learninstrument({
+      video: newvideo
+    });
+    thor.save(function(err, thor) {
+      if (err) return console.error(err);
+      console.dir(thor);
+    });
+  });
+
+});
 
 
 module.exports = router;

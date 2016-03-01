@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head><% include partials/template/head.ejs  %></head>
+  <body>
+  
+   <div id="wrapper">
+
+    <!-- sidebar -->
+    <% include partials/template/header.ejs %>
+
+    <!-- pagecontent -->
+
+    <div class="className" id="page-content-wrapper">
+      <!-- button for navbar -->
+      <div class="button-navbar">
+
+        <button type="button" id="menu-toggle" class="btn btn-warning" aria-label="Left Align">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        </button>
+          <img class="center-block"  src="/images/logonavbar.png" alt="">
+      </div>       
+      <h1>--------------------TEST DB--------------------</h1>
+
+      <div class="col-lg-12">
+        <div class="col-lg-6 block-column">
+
+
+
+        <!-- list all the saved videos! -->
+        <h3 class="text-center">db list:</h3>
+
+        <% for(var i = 0; i < names.length; i++) {%>
+        
+          <p><%= names[i].title %></p>
+
+        <% } %>
+
+
+
+        
+        <!-- END - list all the saved videos! -->
+
+        </div>
+        <div class="col-lg-6 block-column">
+          <h3 class="text-center">Find your favourite videos</h3>
+          <form class="navbar-form" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Enter Video">
+            </div>
+            <button type="submit" class="btn btn-warning find-video-button">Find My Video</button>
+          </form>
+          <!-- testing mongodb -->
+
+          <!-- end - testing mongodb -->
+
+          <div class="col-lg-12">
+            <h2>Results</h2>    
+            <div class="show-videos">
+              <!-- here display videos -->
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>  
+  </div>
+
+    <!-- <% include partials/template/footer.ejs %> -->
+    <% include partials/template/jsdefaults.ejs %>
+
+  </body>
+</html>
+
+
+
