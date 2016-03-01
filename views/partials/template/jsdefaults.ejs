@@ -86,7 +86,6 @@ $(function(){
           var collection = window.location.pathname;
 
           var URL = 'http://localhost:3000'+collection;
-          debugger
           // debugger
           // add item
           $.ajax({
@@ -110,6 +109,42 @@ $(function(){
         });      
       }    
     });
+  });
+
+
+  // delete video 
+  $('.delete-video-button').on('click', function(event){
+    event.preventDefault();
+    
+    if (confirm("Are you sure you want to DELETE this video?")){
+      var info = $( this ).closest( "button" ).attr('info');
+      $( this ).closest( "#video-container" ).hide('slow');
+      var collection = window.location.pathname;
+      var URL = 'http://localhost:3000'+collection;
+      // debugger
+
+      var obj = {
+        video: info
+      }
+
+      debugger
+      $.ajax({
+        url: URL,
+        type: "DELETE",
+        data: JSON.stringify(obj),
+        contentType: "application/json",
+        success: function(data) {
+          console.log(data);
+          console.log("now what is the data, object or string?")
+        },
+        error:   function(xhr, text, err) {
+          console.log('error: ',err);
+          console.log('text: ', text);
+          console.log('xhr: ',xhr);
+          console.log("there is a problem whit your request, please check ajax request");
+        }
+      });
+    }
   });
 
 

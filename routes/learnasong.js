@@ -38,6 +38,15 @@ db.once('open', function() {
     });
   });
 
+  router.delete('/', function(req, res){
+    var removevideo = res.req.body.video;
+    console.log('response from router.delete-video :', removevideo);
+    mongoose.model('Learnasong').remove({"video": removevideo }, function(){
+      console.log('item removed');
+    });
+  });
+
+
 });
 
 module.exports = router;
