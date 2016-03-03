@@ -7,6 +7,8 @@
 <script>
 $(function(){
 
+
+
   // hover effect on image and text for music page
   $('#text-list-image').hide();
   $('.music-image-lists').on({
@@ -18,10 +20,20 @@ $(function(){
     }
   });
 
+  // hover effect on image and text for video pages
+  $('.videos-image-lists').on({
+    mouseenter: function () {
+     $('#text-list-image').show('slow');
+    },
+    mouseleave: function () {
+      $('#text-list-image').hide();
+    }
+  });
+
 // Soundcloud API
   $('.find-list-button').on('click', function(e){
     e.preventDefault();
-    $('.music-image-lists').hide('slow')
+    $('.music-image-lists').hide('slow');
     SC.initialize({
       client_id: '90cf30ff04eaf9e6a8212991b27f9a3b'
     });
@@ -44,86 +56,93 @@ $(function(){
 
 // youtube API
   $('.find-video-button').on('click', function(e) {
-    console.log("here we are !")
-    e.preventDefault();
     var search_topic = $('input').val()
-    $.ajax({
-      url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&q='+search_topic+'&type=video&videoCaption=closedCaption&key=AIzaSyDcADPFKszTytXes32wpf2iotWdTdsMlEU',
-      method: 'GET',
-      dataType: 'jsonp',
-      success: function(data){ 
+    
+    if (search_topic == '' ){
+      alert("Please enter a Video");
+    }
+    else {
+      console.log("here we are !")
+      e.preventDefault();
+      $('.videos-image-lists').hide('slow')
+      $.ajax({
+        url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&q='+search_topic+'&type=video&videoCaption=closedCaption&key=AIzaSyDcADPFKszTytXes32wpf2iotWdTdsMlEU',
+        method: 'GET',
+        dataType: 'jsonp',
+        success: function(data){ 
 
-        var result = data.items;
-        // console.log('complete response', result);
+          var result = data.items;
+          // console.log('complete response', result);
 
-        $.each(result, function(index, item){
-          console.log('each look response', item);
-          var video = "https://www.youtube.com/embed/";
-          var videoid= item.id.videoId;
+          $.each(result, function(index, item){
+            console.log('each look response', item);
+            var video = "https://www.youtube.com/embed/";
+            var videoid= item.id.videoId;
 
-          // constructing the html to add in DOM
-          var html = [
-          '<div class="embed-responsive embed-responsive-16by9 videos-display">',
-            '<iframe class="embed-responsive-item" width="400" height="215" src="'+video+videoid+'">',
-          '</div>'
-          ].join("\n");
+            // constructing the html to add in DOM
+            var html = [
+            '<div class="embed-responsive embed-responsive-16by9 videos-display">',
+              '<iframe class="embed-responsive-item" width="400" height="215" src="'+video+videoid+'">',
+            '</div>'
+            ].join("\n");
 
-          $(html).appendTo('.show-videos');
+            $(html).appendTo('.show-videos');
 
-          $('.show-videos').append("<button type='submit' info="+video+videoid+"  class='btn btn-inverted btn-block btn-xs save-video-button'><span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'></span> Save it!</button>");
-        });
-
-
-        //getting the url of embeded video to be saved (named info)
-        $('.save-video-button').on('click', function(event) {
-          //get video url
-          var info = $( this ).closest( "button" ).attr('info');
-
-          var html = [
-          '<div class="embed-responsive embed-responsive-16by9 videos-display video-container">',
-            '<iframe class="embed-responsive-item" width="400" height="215" src="'+info+'">',
-          '</div>'
-          ].join("\n");
-
-          $(html).appendTo('.new-saved-video');
-          $('.new-saved-video').append("<button type='submit' info="+info+"  class='btn btn-inverted btn-block btn-xs delete-video-button'><span class='glyphicon glyphicon-thumbs-down' aria-hidden='true'></span> Delete it</button>");
-
-
-          var obj = {
-            title: info.toString()
-          }
-
-          console.log(info);
-          // debugger
-
-
-        //----------------ajax request using mongo db ------------
-          var collection = window.location.pathname;
-
-          var URL = 'http://localhost:3000'+collection;
-          // debugger
-          // add item
-          $.ajax({
-            url: URL,
-            type: "POST",
-            data: JSON.stringify(obj),
-            contentType: "application/json",
-            success: function(data) {
-              console.log(data);
-              console.log("now what is the data, object or string?")
-            },
-            error:   function(xhr, text, err) {
-              console.log('error: ',err);
-              console.log('text: ', text);
-              console.log('xhr: ',xhr);
-              console.log("there is a problem whit your request, please check ajax request");
-            }
+            $('.show-videos').append("<button type='submit' info="+video+videoid+"  class='btn btn-inverted btn-block btn-xs save-video-button'><span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'></span> Save it!</button>");
           });
-          //---------------- END  -- ajax request using mongo db --------
 
-        });      
-      }    
-    });
+
+          //getting the url of embeded video to be saved (named info)
+          $('.save-video-button').on('click', function(event) {
+            //get video url
+            var info = $( this ).closest( "button" ).attr('info');
+
+            var html = [
+            '<div class="embed-responsive embed-responsive-16by9 videos-display video-container">',
+              '<iframe class="embed-responsive-item" width="400" height="215" src="'+info+'">',
+            '</div>'
+            ].join("\n");
+
+            $(html).appendTo('.new-saved-video');
+            $('.new-saved-video').append("<button type='submit' info="+info+"  class='btn btn-inverted btn-block btn-xs delete-video-button'><span class='glyphicon glyphicon-thumbs-down' aria-hidden='true'></span> Delete it</button>");
+
+
+            var obj = {
+              title: info.toString()
+            }
+
+            console.log(info);
+            // debugger
+
+
+          //----------------ajax request using mongo db ------------
+            var collection = window.location.pathname;
+
+            var URL = 'http://localhost:3000'+collection;
+            // debugger
+            // add item
+            $.ajax({
+              url: URL,
+              type: "POST",
+              data: JSON.stringify(obj),
+              contentType: "application/json",
+              success: function(data) {
+                console.log(data);
+                console.log("now what is the data, object or string?")
+              },
+              error:   function(xhr, text, err) {
+                console.log('error: ',err);
+                console.log('text: ', text);
+                console.log('xhr: ',xhr);
+                console.log("there is a problem whit your request, please check ajax request");
+              }
+            });
+            //---------------- END  -- ajax request using mongo db --------
+
+          });      
+        }    
+      });
+    }
   });
 
 

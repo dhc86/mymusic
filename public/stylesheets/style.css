@@ -145,19 +145,20 @@ body {
 .text-center {
   padding-bottom: 8px;
 }
-/*
-#songsimage{
-  padding-bottom: 18px;
-}*/
 
 .show-songs {
   padding-bottom: 20px;
 }
 
-/*message inside picture sying to click on list genres*/
+.show-videos {
+ padding-bottom: 20px; 
+}
 
+/*music image effects*/
+/*message inside picture sying to click on list genres*/
 .music-image-lists {
-  background-image: url("/images/musiclists.jpg");
+  background: url(/images/musiclists.jpg) center; 
+  /*background-image: url("/images/musiclists.jpg");*/
   background-color: #cccccc;
   height: 437px;
   width: 100%;
@@ -168,15 +169,33 @@ body {
 #text-list-image {
   color: #FA961D;
   position: absolute !important;
-  top: 45% !important;
+  top: 35% !important;
   left: 10% !important;
-
 }
 
 .music-image-lists:hover {
   background: black;
 }
 .music-image-lists:hover#text-list-image {
+  display: block;
+}
+
+/*videos image effects*/
+.videos-image-lists {
+  background: url(/images/videopicture.jpg) no-repeat;
+  background-size: 100%; 
+  /*background-image: url("/images/musiclists.jpg");*/
+  background-color: #cccccc;
+  height: 280px;
+  width: 100%;
+  position: relative;
+
+}
+
+.videos-image-lists:hover {
+  background: black;
+}
+.videos-image-lists:hover#text-list-image {
   display: block;
 }
 
