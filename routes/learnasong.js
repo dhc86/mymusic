@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // mongoose.createConnection('mongodb://localhost/mydatabase/learnasongs');
-mongoose.connect('mongodb://diego.herrera:cq8bul7i@ds019698.mlab.com:19698/mymusic_database');
+// mongoose.connect('mongodb://diego.herrera:cq8bul7i@ds019698.mlab.com:19698/mymusic_database');
 // mongoose.createConnection('mongodb://diego.herrera:cq8bul7i@ds019698.mlab.com:19698/mymusic_database');
 
 var db = mongoose.connection;
