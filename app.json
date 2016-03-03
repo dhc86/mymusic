@@ -1,0 +1,5 @@
+{
+  "name": "Node.js MYMusic",
+  "description": "Node.js app using MongoDB and Express",
+  "keywords": ["music", "node", "mongodb"]
+}
