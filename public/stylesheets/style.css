@@ -145,3 +145,38 @@ body {
 .text-center {
   padding-bottom: 8px;
 }
+/*
+#songsimage{
+  padding-bottom: 18px;
+}*/
+
+.show-songs {
+  padding-bottom: 20px;
+}
+
+/*message inside picture sying to click on list genres*/
+
+.music-image-lists {
+  background-image: url("/images/musiclists.jpg");
+  background-color: #cccccc;
+  height: 437px;
+  width: 100%;
+  position: relative;
+
+}
+
+#text-list-image {
+  color: #FA961D;
+  position: absolute !important;
+  top: 45% !important;
+  left: 10% !important;
+
+}
+
+.music-image-lists:hover {
+  background: black;
+}
+.music-image-lists:hover#text-list-image {
+  display: block;
+}
+

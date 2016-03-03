@@ -7,11 +7,21 @@
 <script>
 $(function(){
 
-// Soundcloud API
+  // hover effect on image and text for music page
+  $('#text-list-image').hide();
+  $('.music-image-lists').on({
+    mouseenter: function () {
+     $('#text-list-image').show('slow');
+    },
+    mouseleave: function () {
+      $('#text-list-image').hide();
+    }
+  });
 
+// Soundcloud API
   $('.find-list-button').on('click', function(e){
     e.preventDefault();
-
+    $('.music-image-lists').hide('slow')
     SC.initialize({
       client_id: '90cf30ff04eaf9e6a8212991b27f9a3b'
     });
