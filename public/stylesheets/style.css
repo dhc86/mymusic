@@ -199,3 +199,8 @@ body {
   display: block;
 }
 
+.music-list button {
+    color: #fff;
+    background-color: rgb(3, 3, 3);
+    border-color: #eea236;
+}
