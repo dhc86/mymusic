@@ -8,37 +8,29 @@
 $(function(){
 
 // Soundcloud API
-  SC.initialize({
-    client_id: '90cf30ff04eaf9e6a8212991b27f9a3b'
-  });
 
-  $('.find-song-button').on('click', function(e){
+  $('.find-list-button').on('click', function(e){
     e.preventDefault();
 
-
-    var title = $('input').val();
-
-      SC.oEmbed('https://soundcloud.com/friendlistworld/metallica-master-of-puppets', {
-    
-      // element: document.getElementById('putTheWidgetHere')
-      // auto_play: true
-    }).then(function(embed){
-      console.log(embed);
-      console.log(embed.html);
-      console.log(embed.title);
+    SC.initialize({
+      client_id: '90cf30ff04eaf9e6a8212991b27f9a3b'
     });
 
-  
+    var title = $(this).text().toLowerCase().trim();
 
- 
+    var soundcloud_list = "https://soundcloud.com/diego-herrera-805994727/sets/"+title
+    
+    SC.oEmbed(soundcloud_list, { auto_play: false }).then(function(oEmbed) {
 
-    // var track_url = 'http://soundcloud.com/forss/flickermood';
-    // SC.oEmbed(track_url, { auto_play: true }).then(function(oEmbed) {
-    //   console.log('oEmbed response: ', oEmbed);
-    // });   
-
-
+    console.log('oEmbed response: ', oEmbed);
+    console.log( 'html: ' , oEmbed.html);
+    var html = oEmbed.html;
+    $(html).appendTo('.show-songs');
+    });
   });
+
+
+
 
 // youtube API
   $('.find-video-button').on('click', function(e) {

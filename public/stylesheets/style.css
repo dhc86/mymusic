@@ -136,3 +136,12 @@ body {
 .videos-list {
   margin-top: 15px;  
 }
+
+.music-list {
+  margin-bottom: 20px;
+}
+
+/*small fix for boxes*/
+.text-center {
+  padding-bottom: 8px;
+}
