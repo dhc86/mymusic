@@ -205,3 +205,8 @@ body {
     background-color: rgb(3, 3, 3);
     border-color: #eea236;
 }
+
+#music-column-commands {
+  /*position: fixed;*/
+  /*top: 20px;*/
+}
