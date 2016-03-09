@@ -184,6 +184,63 @@ $(function(){
     }
   });
 
+// Instagram API
+
+  $('.find-images-button').on("click", function(event){
+    event.preventDefault();
+    var images = $('input').val();
+
+    debugger
+    
+      $.ajax({
+        url: 'https://api.instagram.com/v1/tags/'+images+'/media/recent?client_id=e7c670bdd50b41e8befbdcdcdf453677',
+        method: 'GET',
+        dataType: 'jsonp',
+        success: function(data){ 
+
+      
+          
+          console.log(data);
+          // $("<p>").text("Results for: " + search).appendTo(".show-images");
+
+          data.data.forEach(function(picture){
+            var pic_url = picture.images.low_resolution.url;
+            var html = '<img src="'+pic_url+'">';
+
+
+
+            $(html).appendTo('.show-images');
+
+            // $('<img>').attr('src',pic_url).appendTo(".show-images");
+
+          });
+
+        },    
+        error: function(){
+          console.log("error in request please verify ajax request! Diego");
+        }
+      });
+  });
+
+
+  // $('.find_pics_word').on("click", function(){
+
+  //   var search = $("#instagram_container input").val();
+    
+  //     $.ajax({
+  //       url: 'https://api.instagram.com/v1/tags/'+search+'/media/recent?client_id=e7c670bdd50b41e8befbdcdcdf453677',
+  //       method: 'GET',
+  //       dataType: 'jsonp',
+  //       success: function(data){ 
+          
+  //          $("<p>").text("Results for: " + search).appendTo(".general");
+
+  //           data.data.forEach(function(picture){
+  //           $('<img>').attr('src',picture.images.low_resolution.url).appendTo(".general");
+  //           });
+  //       }    
+  //     });
+  // });
 
 
   // $('.active-menu').on('click', function(){

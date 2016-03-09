@@ -201,12 +201,32 @@ body {
 
 /* change color for playlist songs buttons*/
 .music-list button {
-    color: #fff;
-    background-color: rgb(3, 3, 3);
-    border-color: #eea236;
+  color: #fff;
+  background-color: rgb(3, 3, 3);
+  border-color: #eea236;
 }
 
-#music-column-commands {
-  /*position: fixed;*/
-  /*top: 20px;*/
+/*instagram-search-container it will show when hover on video!*/
+#instagram-search-container{
+  height: 45%;
+  width: 100%;
+  position: absolute !important;
+  top: 35% !important;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+
+.show-images{
+  padding: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
