@@ -11,6 +11,7 @@
     "debug": "~2.2.0",
     "ejs": "~2.3.3",
     "express": "~4.13.1",
+    "latest-version": "^2.0.0",
     "mongodb-schema": "^3.3.1",
     "mongoose": "^4.4.5",
     "morgan": "~1.6.1",
